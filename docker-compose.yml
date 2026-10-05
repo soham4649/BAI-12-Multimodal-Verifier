@@ -1,0 +1,13 @@
+version: '3.8'
+
+services:
+  verifai-api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: verifai_multimodal_api
+    ports:
+      - "5000:5000"
+    restart: unless-stopped
+    volumes:
+      - ./Backend/uploads:/app/Backend/uploads

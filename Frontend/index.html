@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>VERIFAI — Multimodal Verification</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+
+<body>
+
+    <div class="background-glow glow-one"></div>
+    <div class="background-glow glow-two"></div>
+
+
+    <!-- NAVBAR -->
+
+    <header class="navbar">
+
+        <div class="brand">
+
+            <div class="brand-icon">
+                V
+            </div>
+
+            <div>
+                <h2>VERIFAI</h2>
+                <span>Multimodal Verification</span>
+            </div>
+
+        </div>
+
+
+        <div class="status">
+
+            <span class="status-dot"></span>
+
+            AI SYSTEM ONLINE
+
+        </div>
+
+    </header>
+
+
+
+    <main class="container">
+
+
+        <!-- HERO -->
+
+        <section class="hero">
+
+            <div class="badge">
+                AI-POWERED FACT ANALYSIS
+            </div>
+
+
+            <h1>
+                Verify Information.<br>
+                <span>See Beyond the Claim.</span>
+            </h1>
+
+
+            <p>
+                Analyze text and images together with AI-powered
+                consistency checking and supporting web evidence.
+            </p>
+
+        </section>
+
+
+
+        <!-- WORKSPACE -->
+
+        <section class="workspace">
+
+
+            <!-- INPUT CARD -->
+
+            <div class="input-card">
+
+
+                <!-- CLAIM -->
+
+                <div class="section-title">
+
+                    <div class="number">
+                        01
+                    </div>
+
+                    <div>
+
+                        <h3>
+                            Enter Information
+                        </h3>
+
+                        <p>
+                            Provide the claim or news statement.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <label for="claim">
+                    Claim / News Statement
+                </label>
+
+
+                <textarea
+                    id="claim"
+                    placeholder="Example: This image shows a Golden Retriever dog..."
+                ></textarea>
+
+
+
+                <!-- IMAGE -->
+
+                <div class="image-upload">
+
+
+                    <div class="section-title">
+
+                        <div class="number">
+                            02
+                        </div>
+
+                        <div>
+
+                            <h3>
+                                Upload Image
+                            </h3>
+
+                            <p>
+                                Image used for multimodal analysis.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+
+                    <label class="upload-box">
+
+
+                        <input
+                            type="file"
+                            id="image"
+                            accept="image/*"
+                            onchange="previewImage()"
+                        >
+
+
+                        <div id="uploadContent">
+
+                            <div class="upload-icon">
+                                ↑
+                            </div>
+
+
+                            <strong>
+                                Choose an image
+                            </strong>
+
+
+                            <span>
+                                PNG, JPG, JPEG or WEBP
+                            </span>
+
+                        </div>
+
+
+
+                        <img
+                            id="imagePreview"
+                            class="image-preview"
+                            alt="Image Preview"
+                        >
+
+                    </label>
+
+                </div>
+
+
+
+                <!-- ANALYZE BUTTON -->
+
+                <button
+                    class="verify-btn"
+                    onclick="verifyClaim()"
+                >
+
+                    <span>
+                        ⚡
+                    </span>
+
+                    Analyze Information
+
+                </button>
+
+
+            </div>
+
+
+
+            <!-- RESULT CARD -->
+
+            <div class="result-card">
+
+
+                <!-- RESULT HEADER -->
+
+                <div class="result-header">
+
+                    <div>
+
+                        <span class="mini-label">
+                            ANALYSIS OUTPUT
+                        </span>
+
+                        <h3>
+                            Verification Result
+                        </h3>
+
+                    </div>
+
+
+                    <div class="ai-badge">
+                        AI
+                    </div>
+
+                </div>
+
+
+
+                <!-- RESULT STATUS -->
+
+                <div
+                    id="resultStatus"
+                    class="result-status neutral"
+                >
+
+                    <div class="status-icon">
+                        ?
+                    </div>
+
+
+                    <div>
+
+                        <span
+                            id="statusLabel"
+                            class="status-label"
+                        >
+                            WAITING FOR ANALYSIS
+                        </span>
+
+
+                        <h2 id="resultTitle">
+                            Ready to verify
+                        </h2>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- BASIC METRICS -->
+
+                <div class="metrics">
+
+
+                    <div class="metric">
+
+                        <span>
+                            TEXT–IMAGE CONSISTENCY
+                        </span>
+
+                        <strong id="consistency">
+                            —
+                        </strong>
+
+                    </div>
+
+
+
+                    <div class="metric">
+
+                        <span>
+                            MODEL SIGNAL
+                        </span>
+
+                        <strong id="score">
+                            —
+                        </strong>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- ADVANCED VERIFICATION METRICS -->
+
+                <div class="metrics verification-metrics">
+
+
+                    <div class="metric">
+
+                        <span>
+                            OCR CLAIM MATCH
+                        </span>
+
+                        <strong id="ocrMatch">
+                            —
+                        </strong>
+
+                    </div>
+
+
+
+                    <div class="metric">
+
+                        <span>
+                            COMBINED SIGNAL
+                        </span>
+
+                        <strong id="combinedScore">
+                            —
+                        </strong>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- WEB EVIDENCE -->
+
+                <div class="evidence-section">
+
+
+                    <div class="section-heading">
+
+
+                        <div>
+
+                            <span class="mini-label">
+                                WEB EVIDENCE
+                            </span>
+
+                            <h3>
+                                Supporting Sources
+                            </h3>
+
+                        </div>
+
+
+                        <span
+                            id="sourceBadge"
+                            class="source-badge"
+                        >
+                            0 SOURCES
+                        </span>
+
+                    </div>
+
+
+
+                    <div id="evidenceList">
+
+                        <div class="empty-state">
+
+                            <div>
+                                ⌕
+                            </div>
+
+                            <p>
+                                Evidence will appear here after analysis.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- IMAGE UNDERSTANDING -->
+
+                <div class="summary">
+
+
+                    <div class="summary-title">
+                        IMAGE UNDERSTANDING
+                    </div>
+
+
+                    <p>
+
+                        Detected Content:
+
+                        <strong id="detectedCategory">
+                            —
+                        </strong>
+
+                    </p>
+
+
+                    <p>
+                        Extracted Text:
+                    </p>
+
+
+                    <div
+                        id="ocrText"
+                        class="ocr-text"
+                    >
+                        No text detected.
+                    </div>
+
+                </div>
+
+
+
+                <!-- METADATA FEATURES -->
+                <div class="summary metadata-panel">
+                    <div class="summary-title">IMAGE METADATA FEATURES</div>
+                    <div id="metadataContent">
+                        <p>Metadata will appear after analysis.</p>
+                    </div>
+                </div>
+
+
+                <!-- FINAL SUMMARY -->
+
+                <div class="summary">
+
+
+                    <div class="summary-title">
+                        FINAL VERIFICATION SUMMARY
+                    </div>
+
+
+                    <p id="finalResult">
+                        No verification performed yet.
+                    </p>
+
+
+                    <div class="disclaimer">
+
+                        AI-assisted result based on
+                        text-image consistency, OCR analysis
+                        and retrieved web evidence.
+
+                    </div>
+
+                </div>
+
+
+            </div>
+
+        </section>
+
+
+
+        <!-- FOOTER -->
+
+        <footer>
+
+            <span>
+                VERIFAI
+            </span>
+
+
+            <span>
+                Multimodal Misinformation Verification System
+            </span>
+
+
+            <span>
+                AI-Assisted • Evidence-Based
+            </span>
+
+        </footer>
+
+
+    </main>
+
+
+
+    <script src="script.js"></script>
+
+</body>
+
+</html>
